@@ -4,7 +4,7 @@
 
 [Live Demo](https://rueckwand24-slider-task.vercel.app/)
 
-A modern **Next.js 15** project focused on building a performant and accessible slider UI. This project leverages Turbopack for blazing fast development and includes comprehensive linting, formatting, and accessibility tooling.
+A modern **Next.js 15** project focused on building a performant and accessible slider UI using **Swiper.js**. This project leverages Turbopack for blazing fast development and includes comprehensive linting, formatting, and accessibility tooling.
 
 </div>
 
@@ -13,6 +13,7 @@ A modern **Next.js 15** project focused on building a performant and accessible 
 ## 🚀 Features
 
 - Built with **Next.js 15.3.5** and **React 19**
+- Uses **Swiper.js** for responsive, touch-friendly sliders
 - Fast refresh and bundling via **Turbopack**
 - Accessibility support via `@axe-core/react`
 - Code quality tools: ESLint, Prettier, and TypeScript
@@ -25,6 +26,7 @@ A modern **Next.js 15** project focused on building a performant and accessible 
 | Layer         | Tools & Libraries       |
 | ------------- | ----------------------- |
 | Framework     | Next.js 15, React 19    |
+| Slider        | Swiper.js 11            |
 | Styling       | Tailwind CSS 4, PostCSS |
 | Lint & Format | ESLint, Prettier        |
 | Accessibility | @axe-core/react         |
@@ -52,7 +54,7 @@ npm install
 
 ## 🧪 Development
 
-You can run the project locally in two ways, in both cases don't forget to edit the `.env.example` file as `.env.local`:
+You can run the project locally in two ways:
 
 ### 1. Using npm (with Turbopack):
 
@@ -109,6 +111,7 @@ docker run -p 3000:3000 rueckwand24slider
 ## 🔗 Useful Links
 
 - [Next.js Documentation](https://nextjs.org/docs)
+- [Swiper.js](https://swiperjs.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [ESLint](https://eslint.org/)
 - [Prettier](https://prettier.io/)

@@ -13,7 +13,8 @@
     "dependencies": {
         "next": "15.3.5",
         "react": "^19.1.0",
-        "react-dom": "^19.1.0"
+        "react-dom": "^19.1.0",
+        "swiper": "^11.2.10"
     },
     "devDependencies": {
         "@axe-core/react": "^4.10.2",

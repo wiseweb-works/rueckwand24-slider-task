@@ -1,60 +1,55 @@
 'use client';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Keyboard } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useRef, useEffect, useCallback } from 'react';
 import { sliderItems } from '../data/sliderItems';
 
-const SLIDES_PER_PAGE = parseInt(process.env.NEXT_PUBLIC_SLIDES_PER_PAGE || '4', 10);
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const ImageSlider = () => {
-    const [page, setPage] = useState(0);
-    const sliderRef = useRef<HTMLDivElement>(null);
-    const totalPages = Math.ceil(sliderItems.length / SLIDES_PER_PAGE);
-
-    const handlePrev = useCallback(() => setPage(p => Math.max(0, p - 1)), []);
-    const handleNext = useCallback(
-        () => setPage(p => Math.min(totalPages - 1, p + 1)),
-        [totalPages],
-    );
-
-    const startIndex = page * SLIDES_PER_PAGE;
-    const visibleItems = sliderItems.slice(startIndex, startIndex + SLIDES_PER_PAGE);
-
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                handlePrev();
-            } else if (e.key === 'ArrowRight') {
-                e.preventDefault();
-                handleNext();
-            }
-        };
-
-        const slider = sliderRef.current;
-        if (slider) {
-            slider.addEventListener('keydown', handleKeyDown);
-            return () => slider.removeEventListener('keydown', handleKeyDown);
-        }
-    }, [handlePrev, handleNext]);
-
     return (
-        <div
-            ref={sliderRef}
-            className="mx-auto max-w-6xl"
-            role="region"
-            aria-label="Image Gallery"
-            tabIndex={0}
-        >
-            <ul
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-center"
-                aria-label="Gallery items"
+        <div className="w-full max-w-6xl mx-auto px-4">
+            <Swiper
+                modules={[Navigation, Pagination, Keyboard]}
+                spaceBetween={16}
+                slidesPerView={1}
+                navigation={{
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                }}
+                pagination={{
+                    clickable: true,
+                    el: '.swiper-pagination',
+                }}
+                keyboard={{
+                    enabled: true,
+                    onlyInViewport: true,
+                }}
+                breakpoints={{
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 24,
+                    },
+                    1280: {
+                        slidesPerView: 4,
+                        spaceBetween: 24,
+                    },
+                }}
+                className="swiper-container"
             >
-                {visibleItems.map((item, index) => (
-                    <li key={index}>
+                {sliderItems.map((item, index) => (
+                    <SwiperSlide key={index}>
                         <Link
                             href={item.productUrl}
-                            className="block w-full h-40 sm:h-56 md:h-64 lg:h-72 relative rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                            className="block w-full h-40 sm:h-56 md:h-64 lg:h-72 relative rounded-xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-transform hover:scale-105"
                             aria-label={`View details for ${item.productName} - ${item.metaobject}`}
                         >
                             <Image
@@ -69,80 +64,42 @@ const ImageSlider = () => {
                                 <div>{item.metaobject}</div>
                             </div>
                         </Link>
-                    </li>
+                    </SwiperSlide>
                 ))}
-            </ul>
+            </Swiper>
 
-            {totalPages > 1 && (
-                <nav
-                    className="flex items-center justify-center gap-4 mt-6 select-none"
-                    role="navigation"
-                    aria-label="Gallery navigation"
+            <div className="flex items-center justify-center gap-4 mt-6">
+                <button
+                    className="swiper-button-prev w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                    aria-label="Go to previous slide"
                 >
-                    <button
-                        onClick={handlePrev}
-                        disabled={page === 0}
-                        aria-label="Go to previous page"
-                        className="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        <svg
-                            width="16"
-                            height="16"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                        >
-                            <path
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M15 19l-7-7 7-7"
-                            />
-                        </svg>
-                    </button>
-                    <div
-                        className="flex items-center gap-2"
-                        role="group"
-                        aria-label="Page indicators (dots)"
-                    >
-                        {Array.from({ length: totalPages }).map((_, i) => (
-                            <button
-                                key={i}
-                                onClick={() => setPage(i)}
-                                className={`w-2.5 h-2.5 rounded-full ${i === page ? 'bg-black' : 'bg-gray-300'} transition focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                                aria-label={`Go to page ${i + 1}`}
-                                aria-current={i === page ? 'page' : undefined}
-                            />
-                        ))}
-                    </div>
-                    <button
-                        onClick={handleNext}
-                        disabled={page === totalPages - 1}
-                        aria-label="Go to next page"
-                        className="w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        <svg
-                            width="16"
-                            height="16"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                        >
-                            <path
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M9 5l7 7-7 7"
-                            />
-                        </svg>
-                    </button>
-                </nav>
-            )}
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15 19l-7-7 7-7"
+                        />
+                    </svg>
+                </button>
 
-            <div className="sr-only" aria-live="polite" aria-atomic="true">
-                Page {page + 1} of {totalPages}
+                <div className="swiper-pagination flex items-center gap-2"></div>
+
+                <button
+                    className="swiper-button-next w-8 h-8 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-full disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                    aria-label="Go to next slide"
+                >
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M9 5l7 7-7 7"
+                        />
+                    </svg>
+                </button>
             </div>
         </div>
     );
