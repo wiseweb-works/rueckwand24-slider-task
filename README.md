@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<h1 align="center">Rueckwand24 Slider Task</h1>
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+[Live Demo](https://rueckwand24-slider-task.vercel.app/)
+
+A modern **Next.js 15** project focused on building a performant and accessible slider UI. This project leverages Turbopack for blazing fast development and includes comprehensive linting, formatting, and accessibility tooling.
+
+</div>
+
+---
+
+## 🚀 Features
+
+- Built with **Next.js 15.3.5** and **React 19**
+- Fast refresh and bundling via **Turbopack**
+- Accessibility support via `@axe-core/react`
+- Code quality tools: ESLint, Prettier, and TypeScript
+- Styled with Tailwind CSS 4 and PostCSS
+
+---
+
+## 🧱 Tech Stack
+
+| Layer         | Tools & Libraries       |
+| ------------- | ----------------------- |
+| Framework     | Next.js 15, React 19    |
+| Styling       | Tailwind CSS 4, PostCSS |
+| Lint & Format | ESLint, Prettier        |
+| Accessibility | @axe-core/react         |
+| Language      | TypeScript              |
+
+---
+
+## 📸 Screenshots / Demo
+
+|              Homepage               |              Image Preview              |
+| :---------------------------------: | :-------------------------------------: |
+| ![](./images/homepage.png?raw=true) | ![](./images/preview_page.png?raw=true) |
+
+## 📦 Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/wiseweb-works/rueckwand24-slider-task.git
+cd rueckwand24-slider-task
+npm install
+```
+
+---
+
+## 🧪 Development
+
+You can run the project locally in two ways, in both cases don't forget to edit the `.env.example` file as `.env.local`:
+
+### 1. Using npm (with Turbopack):
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This runs the Next.js development server with Turbopack for fast bundling and hot reload.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2. Using Docker (recommended for consistent environment):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Pull and run the Docker image:
 
-## Learn More
+```bash
+docker pull ghcr.io/wiseweb-works/rueckwand24-slider-task/rueckwand24slider:latest
+docker run -p 3000:3000 ghcr.io/wiseweb-works/rueckwand24-slider-task/rueckwand24slider:latest
+```
 
-To learn more about Next.js, take a look at the following resources:
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔨 Build for Production
 
-## Deploy on Vercel
+Build and start the app locally:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Or build and run a Docker container (assuming you have the Dockerfile):
+
+```bash
+docker build -t rueckwand24slider .
+docker run -p 3000:3000 rueckwand24slider
+```
+
+---
+
+## 🛠 Scripts
+
+| Command         | Description                           |
+| --------------- | ------------------------------------- |
+| `npm run dev`   | Run development server with Turbopack |
+| `npm run build` | Build production bundle               |
+| `npm run start` | Start production server               |
+| `npm run lint`  | Run ESLint checks                     |
+| `npm run check` | Run Prettier check                    |
+| `npm run write` | Format code with Prettier             |
+
+---
+
+## 🔗 Useful Links
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [Axe Core Accessibility](https://github.com/dequelabs/axe-core-npm)
+
+---
+
+## 📄 License
+
+MIT © [Abdullah Koyuncu](https://github.com/wiseweb-works)
+
+---
